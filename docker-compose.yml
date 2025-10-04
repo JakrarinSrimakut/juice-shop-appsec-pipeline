@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  juice-shop:
+    image: bkimminich/juice-shop
+    container_name: juice-shop
+    ports:
+      - "3000:3000"   # maps localhost:3000 → Juice Shop
+
+  zap-baseline:
+    image: zaproxy/zap-stable
+    container_name: zap-scan
+    depends_on:
+      - juice-shop
+    volumes:
+      - ./scans/zap:/zap/wrk   # save reports into scans/zap
+    command: >
+      zap-baseline.py
+      -t http://juice-shop:3000
+      -r zap_report.html
