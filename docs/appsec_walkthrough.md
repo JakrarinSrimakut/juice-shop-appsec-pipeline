@@ -19,11 +19,8 @@
 4. ZAP walkthrough (automated baseline + manual)
 5. Burp walkthrough (intercept, repeater, manual tests)
 6. Practical test payloads (SQLi, XSS, IDOR, JWT)
-7. Screenshot & evidence checklist
-8. Writing up findings (template)
-9. Commit & push artifacts
-10. Quick troubleshooting & tips
-11. References
+7. Quick troubleshooting & tips
+8. References
 
 ---
 
@@ -248,66 +245,7 @@ Log manual tests to: `scans/zap/manual_tests.md` (example entries below).
 
 ---
 
-## 7 — Screenshot & evidence checklist
-
-For every vulnerability or meaningful result, capture:
-
-1. **Setup screenshot**: Browser open to the vulnerable page (`scans/.../setup.png`).  
-2. **Intercepted request**: show request before modification (`req-<name>.png`).  
-3. **Modified request**: show edited payload in Repeater/Request Editor (`mod-<name>.png`).  
-4. **Response evidence**: server response showing payload reflected or action performed (`res-<name>.png`).  
-5. **Alert view / report**: ZAP Alerts or HTML report screenshot (`alert-<name>.png`, `report-open.png`).
-
-Store images under:
-```
-scans/zap/screenshots/
-scans/burpsuite/screenshots/
-```
-
-**Filename convention**: `req-login.png`, `res-xss-search.png`, `alert-stored-xss.png`
-
----
-
-## 8 — Writing up findings (template)
-
-Use this template in `docs/` or `scans/`:
-
-```markdown
-### [Vulnerability Title] — [Severity]
-
-**Description:** Short description.
-
-**Endpoint:** URL and HTTP method.
-
-**Steps to reproduce:**
-1. Step one (exact clicks / form fields and payload).
-2. Step two.
-
-**Evidence:**
-- Request screenshot: `scans/.../req-...png`
-- Response screenshot: `scans/.../res-...png`
-- ZAP report: `scans/zap/zap_report.html`
-
-**Impact:** What an attacker can do.
-
-**Mitigation:** Short recommended fix.
-```
-
----
-
-## 9 — Commit & push artifacts
-
-**Important:** remove/redact sensitive values (full JWTs, API keys, local usernames) before pushing.
-
-```bash
-git add scans/zap/zap_report.html scans/zap/screenshots/* scans/burpsuite/screenshots/* docs/appsec_walkthrough.md
-git commit -m "Add scan report, screenshots, and walkthrough"
-git push
-```
-
----
-
-## 10 — Quick troubleshooting & tips
+## 7 — Quick troubleshooting & tips
 
 - **If the container cannot reach Juice Shop** when running ZAP in a container: use `host.docker.internal:3000` (Docker Desktop) or run both services on same Docker network and target `http://juice-shop:3000`.  
 - **Base64URL vs URL encode**: JWT parts must be Base64URL-encoded (no `%` percent-encoding). Use jwt.io or a small script to encode properly.  
@@ -317,7 +255,7 @@ git push
 
 ---
 
-## 11 — References & further learning
+## 8 — References & further learning
 
 - OWASP Juice Shop — https://owasp.org/www-project-juice-shop/  
 - OWASP ZAP — https://www.zaproxy.org/  
